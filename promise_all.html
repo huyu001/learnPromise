@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // Promise.all([])当多次请求同时完成后执行某种操作
+    Promise.all([
+        // 第一次请求
+        new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve({
+                    name: "huyu",
+                    age: 18
+                })
+            }, 2000)
+        }),
+        // 第二次请求
+        new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve({
+                    name: "dp",
+                    age: 16
+                })
+            }, 1000);
+        })
+        // 请求结果为数组，时第一次请求和第二次请求的数组
+    ]).then((data) => {
+        console.log(data)
+    })
+</script>
+
+</html>

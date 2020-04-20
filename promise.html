@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    new Promise((resolve, reject) => {
+        // 这里面时异步请求代码
+        setTimeout(() => {
+                // 异步请求成功，执行resolve
+                resolve()
+                    // 异步请求失败执行reject代码
+                    // reject("出错")
+            }, 1000)
+            // 执行完resolve后直接执行then
+    }).then(() => {
+        // then为处理异步请求数据代码
+        console.log("第一次请求成功");
+        console.log("hhhh");
+        console.log("hhhh");
+        console.log("hhhh");
+        // return new promise可以嵌套执行异步请求
+        return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("第二次异步请求成功")
+                }, 2000);
+            }).then((data) => {
+                console.log(data)
+                console.log("第二次异步请求")
+                console.log("第二次异步请求")
+                console.log("第二次异步请求")
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        reject("第三次请求失败");
+                    }, 2000);
+                }).then(() => {
+                    console.log("第三次请求成功");
+                }).catch((err) => {
+                    console.log(err)
+                })
+            })
+            //异步请求出错会执行catch代码
+    }).catch((err) => {
+        console.log(err);
+    })
+</script>
+
+</html>
